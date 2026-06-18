@@ -2,7 +2,7 @@
 
 This repository contains the code and configuration files that support the manuscript:
 
-> **Scale-dependent hydrogen-battery substitution in large renewable bases: A stochastic optimization study under carbon pricing**  
+> **Scale-dependent hydrogen-battery substitution in large renewable bases: A two-stage stochastic optimization approach under carbon pricing**  
 > Target journal: *Energy Conversion and Management* (ECM)
 
 ## What is included
