@@ -30,7 +30,7 @@ with open(os.path.join(TAB, "full_experiment_1000t.json"), 'r') as f:
 prices = cp["carbon_price_cny_per_ton"].values
 
 # ================================================================
-# SI Fig. S1: Absolute capacity vs carbon price
+# SI Fig. S2: Absolute capacity vs carbon price
 # ================================================================
 fig, ax = plt.subplots(figsize=mm_inch(165, 95))
 
@@ -71,15 +71,15 @@ if "BESS_E_MWh" in cp.columns:
 else:
     ax.legend(fontsize=7, loc="upper left", frameon=False)
 
-ax.set_title("SI Fig. S1: Absolute capacity vs carbon price", fontsize=10,
+ax.set_title("SI Fig. S2: Absolute capacity vs carbon price", fontsize=10,
              fontweight="bold", pad=6, loc="left")
 plt.tight_layout(pad=0.8)
-save_fig(fig, FIG, "si_fig_s1_carbon_capacity_absolute")
+save_fig(fig, FIG, "si_fig_s2_carbon_capacity_absolute")
 plt.close()
-print("  [OK] si_fig_s1_carbon_capacity_absolute")
+print("  [OK] si_fig_s2_carbon_capacity_absolute")
 
 # ================================================================
-# SI Fig. S2: Emission trajectory
+# SI Fig. S3: Emission trajectory
 # ================================================================
 fig, ax = plt.subplots(figsize=mm_inch(165, 95))
 
@@ -97,15 +97,15 @@ ax.set_xlabel("Carbon price (CNY/t CO$_2$)", fontsize=9)
 ax.set_ylabel("Annual CO$_2$ emissions (Mt)", fontsize=9)
 ax.set_ylim(0, max(emissions.max(), 16) * 1.08)
 ax.legend(fontsize=7, loc="upper right", frameon=False)
-ax.set_title("SI Fig. S2: Emission trajectory vs carbon price", fontsize=10,
+ax.set_title("SI Fig. S3: Emission trajectory vs carbon price", fontsize=10,
              fontweight="bold", pad=6, loc="left")
 plt.tight_layout(pad=0.8)
-save_fig(fig, FIG, "si_fig_s2_emission_trajectory")
+save_fig(fig, FIG, "si_fig_s3_emission_trajectory")
 plt.close()
-print("  [OK] si_fig_s2_emission_trajectory")
+print("  [OK] si_fig_s3_emission_trajectory")
 
 # ================================================================
-# SI Fig. S3: BESS duration vs carbon price
+# SI Fig. S4: BESS duration vs carbon price
 # ================================================================
 if "BESS_E_MWh" in cp.columns and "BESS_P_MW" in cp.columns:
     fig, ax = plt.subplots(figsize=mm_inch(165, 95))
@@ -130,15 +130,15 @@ if "BESS_E_MWh" in cp.columns and "BESS_P_MW" in cp.columns:
 
     ax.set_xlabel("Carbon price (CNY/t CO$_2$)", fontsize=9)
     ax.set_ylabel("BESS duration (h)", fontsize=9)
-    ax.set_title("SI Fig. S3: BESS duration vs carbon price", fontsize=10,
+    ax.set_title("SI Fig. S4: BESS duration vs carbon price", fontsize=10,
                  fontweight="bold", pad=6, loc="left")
     plt.tight_layout(pad=0.8)
-    save_fig(fig, FIG, "si_fig_s3_bess_duration")
+    save_fig(fig, FIG, "si_fig_s4_bess_duration")
     plt.close()
-    print("  [OK] si_fig_s3_bess_duration")
+    print("  [OK] si_fig_s4_bess_duration")
 
 # ================================================================
-# SI Fig. S4: Weekly dispatch heatmap (168 h, Scenario 1)
+# SI Fig. S5: Weekly dispatch heatmap (168 h, Scenario 1)
 # ================================================================
 sc = t1000["tssp"]["scenarios"][0]
 ds, de = 0, 168  # full week
@@ -172,7 +172,7 @@ ax.set_xticks(np.arange(0, 168, 24))
 ax.set_xticklabels([f"D{i+1}" for i in range(7)], fontsize=8)
 ax.set_xlabel("Hour of week (Day 1–7)", fontsize=9)
 
-ax.set_title("SI Fig. S4: Weekly dispatch heatmap (Scenario 1, 168 h)", fontsize=10,
+ax.set_title("SI Fig. S5: Weekly dispatch heatmap (Scenario 1, 168 h)", fontsize=10,
              fontweight="bold", pad=6, loc="left")
 
 # Colorbar with generous padding to avoid overlap
@@ -181,8 +181,8 @@ cbar.set_label("Power (GW)", fontsize=8)
 cbar.ax.tick_params(labelsize=7)
 
 plt.tight_layout(pad=0.8)
-save_fig(fig, FIG, "si_fig_s4_dispatch_heatmap")
+save_fig(fig, FIG, "si_fig_s5_dispatch_heatmap")
 plt.close()
-print("  [OK] si_fig_s4_dispatch_heatmap")
+print("  [OK] si_fig_s5_dispatch_heatmap")
 
 print("\nAll SI figures archive generated!")

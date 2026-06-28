@@ -1,0 +1,2 @@
+﻿n_scenarios,time_limit_s,n_variables,n_binary_variables,n_constraints,build_time_s,solve_time_s,final_status,final_gap_pct,final_obj,peak_memory_gb,final_BESS_P_MW,final_BESS_E_MWh,delta_BESS_P_MW_8s_minus_4s,delta_BESS_E_MWh_8s_minus_4s,delta_Obj_8s_minus_4s
+8,14400,80645,30720,0,11.069072484970093,14403.345066785812,9,4.3200250759818415,-2790548.2628227007,1.5187077224254608e-05,7668.8128196695825,36487.0249490785,1910.4827184528476,14796.063344643255,60344.297058715485
