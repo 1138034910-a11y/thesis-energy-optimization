@@ -60,5 +60,6 @@ if ($Owner) {
 }
 
 Write-Host "Repository created: $url" -ForegroundColor Green
-Write-Host "Next step: run the following command from the project root to update the manuscript:" -ForegroundColor Cyan
-Write-Host ".\.venv\Scripts\python.exe replace_github_url.ps1 `"$url`"" -ForegroundColor Cyan
+Write-Host "Repository URL: $url" -ForegroundColor Green
+Write-Host "Next step: run the following command from the project root to update the manuscript with this URL:" -ForegroundColor Cyan
+Write-Host ".\.venv\Scripts\python.exe replace_github_url.py `"$url`"" -ForegroundColor Cyan

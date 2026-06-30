@@ -5,7 +5,7 @@ Representative Days Module (Time Aggregation for Tractable Optimization)
 Reduces T=8760h annual horizon to N×24h representative days via k-means
 clustering on daily profiles of wind, solar, and load.
 
-Methodology (accepted by Applied Energy / Energy):
+Methodology (used in Journal of Energy Storage / Applied Energy / Energy submissions):
 - Extract 365 daily feature vectors: [wind_24h, solar_24h, load_24h]
 - Normalize each series to zero-mean, unit-variance
 - k-means clustering → N clusters

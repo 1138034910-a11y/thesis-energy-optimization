@@ -1,7 +1,13 @@
 # Data Notice
 
-The raw renewable-energy data used in this study are **not included** in this public repository.
+The following input datasets are included in the `data/` directory of this repository:
 
-Researchers who wish to reproduce the full optimization experiments can request the hourly wind and solar capacity-factor data for Gansu Province from the corresponding author of the manuscript. The request will be evaluated on a reasonable-use basis.
+- `数据.xlsx` — Hourly wind and solar generation profiles by province (8,760 h).
+- `风电数据.xlsx` — Gansu hourly wind generation profile.
+- `光电数据.xlsx` — Gansu hourly solar (PV) generation profile.
+- `甘肃_风电_prediction_result.csv` — Gansu hourly wind prediction results (actual and predicted capacity factors).
+- `甘肃_光伏_prediction_result.csv` — Gansu hourly solar (PV) prediction results (actual and predicted capacity factors).
 
-All model code, solver configuration, and experiment scripts are provided here so that, once the input data are obtained, the reported results can be reproduced from scratch.
+The provincial generation profiles trace to the open dataset accompanying Wang et al. (2023), *Nature Communications* 14, 5379 (https://doi.org/10.1038/s41467-023-40670-7). The Gansu prediction result CSVs were generated with the KAN forecasting pipeline provided in this repository.
+
+Researchers who wish to use the code with alternative input data should ensure the filenames and sheet names match the expectations in `config.py` and the figure-generation scripts.

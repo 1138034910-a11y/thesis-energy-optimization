@@ -1,6 +1,6 @@
 """
 H2-BESS Substitution Curve — Journal-Grade Visualization
-Compatible with: Applied Energy, Energy, Nature Energy, IEEE TPWRS
+Compatible with: Journal of Energy Storage, Applied Energy, Energy, Nature Energy, IEEE TPWRS
 Author: [Your Name]
 Date: 2026-05-08
 """

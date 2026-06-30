@@ -1,20 +1,22 @@
-# Scale-dependent hydrogen-battery substitution in large renewable bases: A two-stage stochastic optimization approach under carbon pricing
+# Scale-dependent hydrogen-battery substitution in large-scale renewable bases under carbon pricing: A two-stage stochastic optimization framework
 
-**Target journal:** *Energy Conversion and Management* (ECM)  
+**Target journal:** *Journal of Energy Storage* (JES)  
 **Article type:** Full Length Article  
 **First author:** Haoshuang Cheng  
 **Corresponding author:** LeiMing Li (19920005@upc.edu.cn)  
 **Affiliation:** School of Economics and Management, China University of Petroleum (East China), Qingdao 266580, China
 
+**Repository:** https://github.com/1138034910-a11y/thesis-energy-optimization
+
 ---
 
 ## Repository Overview
 
-This repository contains the complete workflow for the paper:
+This repository contains the data and code for reproducing the paper:
 
-> **Scale-dependent hydrogen-battery substitution in large renewable bases: A two-stage stochastic optimization approach under carbon pricing**
+> **Scale-dependent hydrogen-battery substitution in large-scale renewable bases under carbon pricing: A two-stage stochastic optimization framework**
 
-The workflow covers probabilistic forecasting (KAN), Gaussian Copula scenario generation, representative-day clustering, two-stage stochastic MILP optimization, and post-hoc substitution-elasticity analysis.
+The workflow covers probabilistic forecasting (KAN), Gaussian Copula scenario generation, representative-day clustering, two-stage stochastic MILP optimization, and post-hoc Storage Substitution Elasticity (SSE) analysis. This repository includes the input datasets and all model code so that the reported results can be reproduced. Result files and manuscript documents are **not** included in this repository.
 
 ---
 
@@ -22,30 +24,23 @@ The workflow covers probabilistic forecasting (KAN), Gaussian Copula scenario ge
 
 ```
 .
-├── AGENTS.md                          # Project memory and decisions
 ├── README.md                          # This file
+├── LICENSE                            # MIT License
+├── .gitignore                         # Git ignore rules
+├── requirements.txt                   # Python dependencies
 ├── config.py                          # Project configuration
-├── gurobi.lic                         # Gurobi license
+├── DATA_NOTICE.md                     # Data availability statement
+├── GITHUB_SETUP.md                    # Instructions for creating/pushing the repo
+├── create_and_push_repo.ps1           # PowerShell helper to create the GitHub repo
+├── references.bib                     # Bibliography (BibTeX)
 │
-├── main_ecm.tex                       # Compiled LaTeX manuscript source
-├── main_ecm.pdf                       # Compiled PDF (main text + SI)
-├── main_ecm_bibliography.tex          # Generated bibliography
-├── main_ecm_supplementary.tex         # Generated supplementary material
-├── main_ecm.{aux,out,log,spl}         # LaTeX compilation artifacts
-│
-├── manuscript_complete_v2.md          # Authoritative merged manuscript (Markdown)
-├── manuscript_complete_v2_ecm_work.md # Working version of the manuscript
-│
-├── paper/                             # Manuscript section sources
-│   ├── section_00_abstract_and_frontmatter.md
-│   ├── section_01_introduction.md
-│   ├── ...
-│   ├── section_08_supplementary_material.md
-│   ├── cover_letter.md
-│   ├── DOI_VALIDATION_REPORT.md
-│   ├── manuscript_complete_v2.md
-│   ├── manuscript_complete_v2.docx
-│   └── references.bib
+├── data/                              # Input datasets (wind/solar profiles and KAN prediction results)
+│   ├── 数据.xlsx
+│   ├── 风电数据.xlsx
+│   ├── 光电数据.xlsx
+│   ├── 甘肃_风电_prediction_result.csv
+│   ├── 甘肃_光伏_prediction_result.csv
+│   └── README.md
 │
 ├── src/                               # Core model implementation
 │   ├── stochastic_model.py
@@ -53,83 +48,70 @@ The workflow covers probabilistic forecasting (KAN), Gaussian Copula scenario ge
 │   ├── kan_predictor.py
 │   ├── scenario_generator.py
 │   ├── representative_days.py
-│   └── sensitivity_analysis.py
+│   ├── sensitivity_analysis.py
+│   ├── baseline_predictors_FIXED.py
+│   └── analysis_FIXED.py
 │
 ├── experiments/                       # Experiment scripts
 │   ├── run_full_experiment_v3.py
 │   ├── run_h2_sensitivity_v3_rigorous_vss.py
 │   ├── run_carbon_price_sensitivity_final.py
-│   ├── run_endogenous_h2_capacity.py
+│   ├── run_copula_sensitivity_v3.py
+│   ├── run_scenario_count_tractability.py
+│   ├── run_mipstart_robustness_400t.py
+│   ├── run_sse_cost_sensitivity.py
 │   └── ...
 │
-├── scripts/                           # Figure generation and audit scripts
-│   ├── generate_all_paper_figures_unified.py
-│   ├── nature_style.py
-│   ├── merge_manuscript.py
-│   ├── verify_dois.py
-│   └── ...
-│
-├── data/                              # Raw input data
-├── results/                           # Figures, tables, and solver logs
-│   ├── figures_paper/                 # Current paper figures
-│   ├── figures_journal/               # Journal-format figures
-│   ├── tables/                        # CSV/JSON result tables
-│   ├── logs/                          # Solver logs
-│   └── archive/                       # Archived intermediate tables
-│
-├── references/                        # Reference PDFs
-├── archive/                           # Old files, backups, and superseded scripts
-├── submission_package/                # Files prepared for journal submission
-└── .venv/                             # Python virtual environment
+└── scripts/                           # Figure generation and post-processing
+    ├── generate_all_paper_figures_unified.py
+    ├── generate_si_figures.py
+    ├── nature_style.py
+    ├── fill_si_tables_from_experiments.py
+    ├── compute_sse_confidence.py
+    ├── plot_encroachment_evidence.py
+    ├── plot_mac_crossover.py
+    ├── plot_storage_energy_cost.py
+    └── ...
 ```
 
 ---
 
-## LaTeX Compilation Pipeline
+## Quick Start
 
-From the project root, run:
+1. Install dependencies (preferably in a virtual environment):
 
-```powershell
-pandoc manuscript_complete_v2_ecm_work.md -o body_raw2.tex `
-  --from=markdown+tex_math_dollars+tex_math_single_backslash
-python clean_body.py
-python fix_math_blocks.py
-python convert_citations_to_cite.py
-python generate_bibliography_tex.py
-python assemble_main_ecm.py
-python fix_math_envs.py
-python fix_final_issues.py
-python clean_si.py
-pdflatex main_ecm.tex
-pdflatex main_ecm.tex
-```
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-`pandoc` is at `D:\Anaconda3\Library\bin\pandoc.exe` and `pdflatex` is from TeX Live 2026.
+2. Confirm that the input data files listed in `data/README.md` are present.
 
----
+3. Run the main experiments:
 
-## DOCX Export
+   ```powershell
+   python experiments\run_h2_sensitivity_v3_rigorous_vss.py
+   python experiments\run_carbon_price_sensitivity_final.py
+   ```
 
-```powershell
-pandoc manuscript_complete_v2.md -o paper\manuscript_complete_v2.docx `
-  --from=markdown+tex_math_dollars --resource-path=paper;results/figures_paper
-```
+4. Generate figures and tables locally:
 
-Close Word before running to avoid file-lock errors.
+   ```powershell
+   python scripts\generate_all_paper_figures_unified.py
+   python scripts\fill_si_tables_from_experiments.py
+   ```
 
 ---
 
 ## Data and Code Availability
 
-- The hourly wind and solar capacity factor data for Gansu Province are available upon reasonable request from the corresponding author of [20].
-- The optimization model, scenario-generation scripts, and solver configuration files are publicly available in a GitHub repository (URL to be added before submission).
+- The input datasets (provincial wind/solar generation profiles and Gansu KAN prediction results) are included in the `data/` directory.
+- The source paper PDF and supplementary reference documents are excluded; see Wang et al. (2023), *Nature Communications* 14, 5379.
+- The optimization model, scenario-generation scripts, KAN forecasting code, and solver configuration files are publicly available at: https://github.com/1138034910-a11y/thesis-energy-optimization
 
 ---
 
-## Key Manuscript Metrics
+## Citation
 
-- Main-text prose: ~7,900 words (limit 9,000)
-- Main figures: 8
-- Main tables: 5
-- Total pages: 50 (main text + references + supplementary)
-- References: 53 (all cited in main text)
+If you use this code or data, please cite the manuscript once published.

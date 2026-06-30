@@ -38,7 +38,7 @@ def build_two_stage_model(load_profile,
     T = phys["T"]
     S = len(weights)
     m = gp.Model("TSSP_RE_H2_Storage_UHV")
-    m.setParam("OutputFlag", 1)
+    m.setParam("OutputFlag", solver_cfg.get("OutputFlag", 1))
     m.setParam("MIPGap", solver_cfg.get("MIPGap", 0.05))
     m.setParam("TimeLimit", solver_cfg.get("TimeLimit", 7200))
     m.setParam("Threads", solver_cfg.get("Threads", 0))

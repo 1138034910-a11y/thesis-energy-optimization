@@ -33,7 +33,7 @@ def build_deterministic_model(load_profile, mu_wind, mu_solar, econ, phys, solve
     """Deterministic MILP using expected renewable profiles."""
     T = phys["T"]
     m = gp.Model("Deterministic_RE_H2_UHV")
-    m.setParam("OutputFlag", 1)
+    m.setParam("OutputFlag", solver_cfg.get("OutputFlag", 1))
     m.setParam("MIPGap", solver_cfg.get("MIPGap", 0.05))
     m.setParam("TimeLimit", solver_cfg.get("TimeLimit", 3600))
     m.setParam("Threads", solver_cfg.get("Threads", 0))

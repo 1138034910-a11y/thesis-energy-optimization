@@ -3,7 +3,7 @@
 Project: KAN-Enhanced Two-Stage Stochastic Optimization for
          Electric-Hydrogen-Storage-Transportation Systems
 Version: 2.0 (Production-Ready for SCI Q1/Q2 Journals)
-Target Journals: Applied Energy, Energy, IJEPES, Renewable Energy
+Target Journals: Journal of Energy Storage, Applied Energy, Energy, IJEPES, Renewable Energy
 ================================================================================
 All monetary units: 10^4 CNY (万元)
 All power units: MW / MWh

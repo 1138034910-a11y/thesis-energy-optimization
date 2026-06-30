@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Nature-standard figure style module for Applied Energy / ECM submission.
+Nature-standard figure style module for Journal of Energy Storage / Applied Energy submissions.
 Unified rcParams, color palette, and helper functions.
 
 Key standards:
